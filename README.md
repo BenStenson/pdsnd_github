@@ -11,4 +11,4 @@ This project took data from three major cities and returns statistics on practic
 washington.csv, chicago.csv, new_york_city.csv, scratch_3.py
 
 ### Credits
-Udacity
+Udacity.com, stackoverflow.com

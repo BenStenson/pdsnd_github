@@ -20,7 +20,7 @@ def get_filters():
     city = input("Enter the name of the city (Washington, Chicago, New York City): ").lower()
 
     # get user input for month (all, january, february, ... , june)
-    month = input('Enter the name of the month or all (January to June: ').lower()
+    month = input('Enter the name of the month or all (January to June: )').lower()
 
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = input('Enter the day of the week or all: ').lower()

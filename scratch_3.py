@@ -1,10 +1,12 @@
 import time
+import csv
 import pandas as pd
 import numpy as np
 
-CITY_DATA = { 'chicago': 'chicago.csv',
-              'new york city': 'new_york_city.csv',
-              'washington': 'washington.csv' }
+CITY_DATA = {'chicago': 'chicago.csv',
+             'new york city': 'new_york_city.csv',
+             'washington': 'washington.csv'}
+
 
 def get_filters():
     """
@@ -15,17 +17,34 @@ def get_filters():
         (str) month - name of the month to filter by, or "all" to apply no month filter
         (str) day - name of the day of week to filter by, or "all" to apply no day filter
     """
-    print('Hello! Let\'s explore some US bikeshare data!')
-    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
-    city = input("Enter the name of the city (Washington, Chicago, New York City): ").lower()
+    continuing = True
+    while continuing:
+        print('Hello! Let\'s explore some US bikeshare data!')
+        # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
 
-    # get user input for month (all, january, february, ... , june)
-    month = input('Enter the name of the month or all (January to June: )').lower()
+        city = input("Enter the name of the city (Washington, Chicago, New York City): ").lower()
+        if city == "washington" or city == "chicago" or city == "new york city":
+            city = city
+        else:
+            print("Incorrect city entry.")
+            continue
 
-    # get user input for day of week (all, monday, tuesday, ... sunday)
-    day = input('Enter the day of the week or all: ').lower()
-
-    print('-'*40)
+        # get user input for month (all, january, february, ... , june)
+        month = input('Enter the name of the month or all (January to June): ').lower()
+        if month == 'january' or month == 'february' or month == 'march' or month == 'april' or month == 'may' or month == 'june' or month == 'all':
+            month == month
+        else:
+            print('Incorrect month entry')
+            continue
+        # get user input for day of week (all, monday, tuesday, ... sunday)
+        day = input('Enter the day of the week or all: ').lower()
+        if day == 'monday' or day == 'tuesday' or day == 'wednesday' or day == 'thursday' or day == 'friday' or day == 'saturday' or day == 'sunday' or day == 'all':
+            day == day
+            continuing = False
+        else:
+            print('Incorrect day entry')
+            continue
+        print('-' * 40)
     return city, month, day
 
 
@@ -73,7 +92,7 @@ def time_stats(df):
     start_time = time.time()
 
     # display the most common month
-    months = {1: 'January' ,2: 'February',3: 'March',4: 'April',5: 'May',6: 'June'}
+    months = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June'}
     popular_month = df['month'].mode()[0]
     print("Most Popular Month: ", months[popular_month])
 
@@ -87,7 +106,7 @@ def time_stats(df):
     print('Most Popular Hour: ', popular_hour)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def station_stats(df):
@@ -109,7 +128,7 @@ def station_stats(df):
     print('The Most Popular Trip is from', start_end_combo)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def trip_duration_stats(df):
@@ -123,11 +142,11 @@ def trip_duration_stats(df):
     print('The total travel time is :', total_travel_time, 'minutes')
 
     # display mean travel time
-    mean_travel_time= df['Trip Duration'].mean()
+    mean_travel_time = df['Trip Duration'].mean()
     print('The average travel time is :', mean_travel_time, 'minutes')
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
 
 
 def user_stats(df):
@@ -153,7 +172,9 @@ def user_stats(df):
         print('The Most Common Birth Year is:', most_common_by)
 
     print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print('-' * 40)
+
+
 
 
 def main():
@@ -165,12 +186,12 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
-            print("Goodbye!")
             break
 
 
 if __name__ == "__main__":
-	main()
+    main()
